@@ -31,8 +31,14 @@ def main():
     else:
         query= input("Ask Claude: ")
 
-    if check_mcp_server():
-        client= ClaudeMCPClient()
-        response= client.ask(query)
-        print(response)
-    else:
+    client= ClaudeMCPClient()
+    print(f"Searching for: {query}")
+
+    try:
+        answer = client.get_final_answer(query)
+        print("Answer", answer)
+    except Exception as e:
+        print(e)
+
+if __name__ == "__main__":
+    main()   
